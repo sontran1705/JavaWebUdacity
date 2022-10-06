@@ -11,12 +11,12 @@ public interface NotesMapper {
     @Select("SELECT * FROM NOTES WHERE userId = #{userid}")
     ArrayList<Notes> getAllNote(int userid);
 
-    @Insert("INSERT INTO NOTES (notetitle, notedescription, userId) VALUES(#{noteTitle}, #{noteDescription}, #{userId})")
+    @Insert("INSERT INTO NOTES (noteTitle, noteDescription, userId) VALUES(#{noteTitle}, #{noteDescription}, #{userId})")
     @Options(useGeneratedKeys = true, keyProperty = "noteId")
     int insert(Notes notes);
 
-    @Update("UPDATE NOTES SET noteDescription = #{noteDescription}, noteTitle = #{notetitle} WHERE noteId = #{noteId}")
-    int update(String noteDescription, String noteTitle, int noteId);
+    @Update("UPDATE NOTES SET noteTitle = #{noteTitle}, noteDescription = #{noteDescription} WHERE noteId = #{noteId}")
+    int update(String noteTitle, String noteDescription, int noteId);
 
     @Delete("DELETE FROM NOTES WHERE noteId = #{noteId}")
     int delete(int noteId);

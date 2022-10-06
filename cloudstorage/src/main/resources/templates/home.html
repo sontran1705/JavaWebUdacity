@@ -11,9 +11,9 @@
 <body class="p-3 mb-2 bg-light text-black">
 <div class="container">
     <div id="logoutDiv">
-       <!-- <form action="#" th:action="@{/logout}" method="POST">
+        <form action="#" th:action="@{/logout}" method="POST">
             <button type="submit" id="logout-button" class="btn btn-secondary float-right">Logout</button>
-        </form>-->
+        </form>
     </div>
     <div id="contentDiv" style="clear: right;">
         <nav style="clear: right;">
@@ -50,10 +50,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:if="${listFile.empty}">
+                        <tr th:if="${lstFile.empty}">
                             <td> No file found! </td>
                         </tr>
-                        <tr th:each="file : ${listFile}">
+                        <tr th:each="file : ${lstFile}">
                             <td>
                                 <a target="_blank" class="btn btn-success" th:href="@{/files/download/{fileId}(fileId=${file.fileId})}">View</a>
                                 <a  class="btn btn-danger" th:href="@{/files/delete/{fileId}(fileId=${file.fileId})}">Delete</a>
@@ -79,10 +79,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:if="${listNote.empty}">
+                        <tr th:if="${lstNote.empty}">
                             <td> No note found! </td>
                         </tr>
-                            <tr th:each="note : ${listNote}">
+                            <tr th:each="note : ${lstNote}">
                                 <td>
                                     <button type="button" th:id="'edit-note-' + ${note.noteId}" class="btn btn-success" th:attr="onclick=|showNoteModal('${note.noteId}', '${note.noteTitle}', '${note.noteDescription}')|">Edit</button>
                                     <a class="btn btn-danger" th:id="'delete-note-' + ${note.noteId}" th:href="@{/notes/delete/{noteId}(noteId=${note.noteId})}">Delete</a>
@@ -132,7 +132,7 @@
                 </button>
 
                 <div class="table-responsive">
-                    <!-- <table class="table table-striped" th:object="${credentials}" id="credentialTable">
+                     <table class="table table-striped" th:object="${credentials}" id="credentialTable">
                          <thead>
                          <tr>
                              <th style="width: 20%" scope="col"></th>
@@ -142,23 +142,23 @@
                          </tr>
                          </thead>
                          <tbody>
-                         <tr th:if="${listCredential.empty}">
+                         <tr th:if="${lstCredential.empty}">
                              <td> No Credentials found! </td>
                          </tr>
-                         <tr th:each="credential : ${listCredential}">
+                         <tr th:each="credential : ${lstCredential}">
                              <td>
-                                 <button type="button" th:id="'edit-credential-' + ${credential.credentialId}" class="btn btn-success" th:attr="onclick=|showCredentialModal('${credential.credentialId}', '${credential.url}', '${credential.username}', '${credential.dePassword}')|">Edit</button>
+                                 <button type="button" th:id="'edit-credential-' + ${credential.credentialId}" class="btn btn-success" th:attr="onclick=|showCredentialModal('${credential.credentialId}', '${credential.url}', '${credential.userName}', '${credential.encodePassWord}')|">Edit</button>
                                  <a class="btn btn-danger" th:id="'delete-credential-' + ${credential.credentialId}" th:href="@{/credentials/delete/{credentialId}(credentialId=${credential.credentialId})}">Delete</a>
                              </td>
                              <th th:text="${credential.url}" scope="row">Example Credential URL</th>
-                             <td th:text="${credential.username}">Example Credential Username</td>
-                             <td th:text="${credential.password}">Example Credential Password</td>
+                             <td th:text="${credential.userName}">Example Credential Username</td>
+                             <td th:text="${credential.passWord}">Example Credential Password</td>
                          </tr>
                          </tbody>
-                     </table>-->
+                     </table>
                 </div>
 
-                <!-- <div class="modal fade" id="credentialModal" tabindex="-1" role="dialog" aria-labelledby="credentialModalLabel" aria-hidden="true">
+                 <div class="modal fade" id="credentialModal" tabindex="-1" role="dialog" aria-labelledby="credentialModalLabel" aria-hidden="true">
                      <div class="modal-dialog" role="document">
                          <div class="modal-content">
                              <div class="modal-header">
@@ -176,11 +176,11 @@
                                      </div>
                                      <div class="form-group">
                                          <label for="credential-username" class="col-form-label">Username</label>
-                                         <input type="text" name= "username" class="form-control" id="credential-username" maxlength="30" required>
+                                         <input type="text" name= "userName" class="form-control" id="credential-username" maxlength="30" required>
                                      </div>
                                      <div class="form-group">
                                          <label for="credential-password" class="col-form-label">Password</label>
-                                         <input type="text" name= "password" class="form-control" id="credential-password" maxlength="30" required>
+                                         <input type="text" name= "passWord" class="form-control" id="credential-password" maxlength="30" required>
                                      </div>
                                      <button id="credentialSubmit" type="submit" class="d-none"></button>
                                  </form>
@@ -191,7 +191,7 @@
                              </div>
                          </div>
                      </div>
-                 </div>-->
+                 </div>
             </div>
         </div>
     </div>
@@ -204,19 +204,19 @@
 <!--For opening the note modal-->
 <script type="text/javascript">
     // For opening the note modal
-    function showNoteModal(noteId,noteDescription, noteTitle ) {
+    function showNoteModal(noteId, noteTitle, noteDescription) {
         $('#note-id').val(noteId ? noteId : '0');
-        $('#note-description').val(noteDescription ? noteDescription : '');
         $('#note-title').val(noteTitle ? noteTitle : '');
+        $('#note-description').val(noteDescription ? noteDescription : '');
         $('#noteModal').modal('show');
     }
 
     // For opening the credentials modal
-    function showCredentialModal(credentialId, url, username, password) {
+    function showCredentialModal(credentialId, url, userName, passWord) {
         $('#credential-id').val(credentialId ? credentialId : '0');
         $('#credential-url').val(url ? url : '');
-        $('#credential-username').val(username ? username : '');
-        $('#credential-password').val(password ? password : '');
+        $('#credential-username').val(userName ? userName : '');
+        $('#credential-password').val(passWord ? passWord : '');
         $('#credentialModal').modal('show');
     }
 

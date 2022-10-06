@@ -2,6 +2,8 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import com.udacity.jwdnd.course1.cloudstorage.entity.Files;
 import com.udacity.jwdnd.course1.cloudstorage.entity.Notes;
+import com.udacity.jwdnd.course1.cloudstorage.model.CredentialsEncode;
+import com.udacity.jwdnd.course1.cloudstorage.services.CredentialsService;
 import com.udacity.jwdnd.course1.cloudstorage.services.FilesService;
 import com.udacity.jwdnd.course1.cloudstorage.services.MessageListService;
 import com.udacity.jwdnd.course1.cloudstorage.services.NotesService;
@@ -17,49 +19,25 @@ import java.util.List;
 @RequestMapping("/home")
 public class HomeController {
 
-    private MessageListService messageListService;
-
     @Autowired
     private FilesService filesService;
 
     @Autowired
     private NotesService noteService;
-
-
+    
+    @Autowired
+    private CredentialsService credentialsService;
 
     @GetMapping()
     public String showHome(Model model){
-        List<Notes> listUserNote = noteService.getAllNote();
-       /* List<CredentialWithDecryptedPassword> listUserCredential = credentialService.getAllCredential();*/
-        List<Files> listUserFile = filesService.getAllFile();
-      /*  System.out.println("Note count: " + listUserNote.size());
-        System.out.println("Credential count: " + listUserCredential.size());*/
-        model.addAttribute("listNote", listUserNote);
-       /* model.addAttribute("listCredential", listUserCredential);*/
-        model.addAttribute("listFile", listUserFile);
+        List<Notes> lstUserNote = noteService.getAllNote();
+        List<CredentialsEncode> lstUserCredential = credentialsService.getAllCredential();
+        List<Files> lstUserFile = filesService.getAllFile();
+
+        model.addAttribute("lstNote", lstUserNote);
+        model.addAttribute("lstCredential", lstUserCredential);
+        model.addAttribute("lstFile", lstUserFile);
+
         return "home";
     }
-
-
-
-  /*  public HomeController(MessageListService messageListService) {
-        this.messageListService = messageListService;
-    }
-
-    @GetMapping()
-    public String getHomePage(MessageForm messageForm, Model model) {
-        model.addAttribute("greetings", this.messageListService.getMessages());
-        return "home";
-    }
-
-    @PostMapping()
-    public String addMessage(MessageForm messageForm, Model model) {
-        messageListService.addMessage(messageForm.getText());
-        model.addAttribute("greetings", messageListService.getMessages());
-        messageForm.setText("");
-        return "home";
-    }
-    */
-
-
 }

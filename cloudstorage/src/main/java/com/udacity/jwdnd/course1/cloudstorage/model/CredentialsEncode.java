@@ -1,6 +1,6 @@
-package com.udacity.jwdnd.course1.cloudstorage.entity;
+package com.udacity.jwdnd.course1.cloudstorage.model;
 
-public class Credentials {
+public class CredentialsEncode {
 
     private int credentialId;
 
@@ -14,17 +14,16 @@ public class Credentials {
 
     private int userId;
 
-    public Credentials(int credentialId, String url, String userName, byte[] key, String passWord, int userId) {
+    private String encodePassWord;
+
+    public CredentialsEncode(int credentialId, String url, String userName, byte[] key, String passWord, int userId, String encodePassWord) {
         this.credentialId = credentialId;
         this.url = url;
         this.userName = userName;
         this.key = key;
         this.passWord = passWord;
         this.userId = userId;
-    }
-
-    public Credentials() {
-
+        this.encodePassWord = encodePassWord;
     }
 
     public int getCredentialId() {
@@ -74,7 +73,12 @@ public class Credentials {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
+    public String getEncodePassWord() {
+        return encodePassWord;
+    }
+
+    public void setEncodePassWord(String encodePassWord) {
+        this.encodePassWord = encodePassWord;
+    }
 }
-
-
-

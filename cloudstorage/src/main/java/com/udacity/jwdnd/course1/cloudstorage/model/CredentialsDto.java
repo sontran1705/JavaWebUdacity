@@ -1,6 +1,6 @@
-package com.udacity.jwdnd.course1.cloudstorage.entity;
+package com.udacity.jwdnd.course1.cloudstorage.model;
 
-public class Credentials {
+public class CredentialsDto {
 
     private int credentialId;
 
@@ -8,23 +8,13 @@ public class Credentials {
 
     private String userName;
 
-    private byte[] key;
-
     private String passWord;
 
-    private int userId;
-
-    public Credentials(int credentialId, String url, String userName, byte[] key, String passWord, int userId) {
+    public CredentialsDto(int credentialId, String url, String userName, String passWord) {
         this.credentialId = credentialId;
         this.url = url;
         this.userName = userName;
-        this.key = key;
         this.passWord = passWord;
-        this.userId = userId;
-    }
-
-    public Credentials() {
-
     }
 
     public int getCredentialId() {
@@ -51,14 +41,6 @@ public class Credentials {
         this.userName = userName;
     }
 
-    public byte[] getKey() {
-        return key;
-    }
-
-    public void setKey(byte[] key) {
-        this.key = key;
-    }
-
     public String getPassWord() {
         return passWord;
     }
@@ -67,14 +49,13 @@ public class Credentials {
         this.passWord = passWord;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
+    @Override
+    public String toString() {
+        return "CredentialsDto{" +
+                "credentialId=" + credentialId +
+                ", url='" + url + '\'' +
+                ", userName='" + userName + '\'' +
+                ", passWord='" + passWord + '\'' +
+                '}';
     }
 }
-
-
-
