@@ -40,4 +40,9 @@ public class HomeController {
 
         return "home";
     }
+    @GetMapping(value = "/invalid")
+    public String invalid(){
+        return "error";
+    }
+
 }
